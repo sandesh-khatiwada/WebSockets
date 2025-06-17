@@ -5,6 +5,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -18,9 +21,20 @@ public class Message {
 
     private String content;
 
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
     @ManyToOne
-    @JoinColumn(name = "user_id" , nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
 
+    @Transient // Not persisted in the database
+    private Long userId; // Maps to user_id in JSON
+
+    @Override
+    public String toString() {
+        return "Message{senderId=" + (this.user != null ? this.user.getUser_id() : userId) + ", content='" + content + "'}";
+    }
 }

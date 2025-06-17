@@ -1,9 +1,9 @@
 package com.websocket.chatApp.controller;
 
-import com.websocket.chatApp.model.Message;
-import com.websocket.chatApp.model.User;
-import com.websocket.chatApp.repository.MessageRepository;
-import com.websocket.chatApp.repository.UserRepository;
+import com.websocket.chatApp.mapper.MessageMapper;
+import com.websocket.chatApp.dto.MessageRequest;
+import com.websocket.chatApp.dto.MessageResponse;
+import com.websocket.chatApp.service.websockets.WebSocketService;
 import lombok.AllArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -13,31 +13,15 @@ import org.springframework.stereotype.Controller;
 @AllArgsConstructor
 public class WebSocketController {
 
-    private final UserRepository userRepository;
-    private final MessageRepository messageRepository;
+    private final WebSocketService webSocketService;
+
+    private final MessageMapper messageMapper;
 
     @MessageMapping("/chat")
     @SendTo("/topic/messages")
-    public Message sendMessage(String message){
-//        System.out.println("Received message: "+message);
-//        Message msg = new Message();
-//        msg.setContent("Message: "+message);
-//
-//
-//        // Dummy user
-//        return msg;
+    public MessageResponse sendMessage(MessageRequest messageDTO) {
 
-        System.out.println("Received message: "+message);
-        User user = userRepository.findById(1L).get();
+        return webSocketService.sendMessage(messageDTO);
 
-        Message msg = new Message();
-
-        System.out.println(message);
-        msg.setContent(message);
-        msg.setUser(user);
-
-        messageRepository.save(msg);
-
-        return msg;
     }
 }

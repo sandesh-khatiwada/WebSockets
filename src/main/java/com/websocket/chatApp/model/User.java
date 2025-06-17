@@ -27,4 +27,9 @@ public class User {
     @JsonManagedReference
 
     private List<Message> messages;
+
+    @Override
+    public String toString() {
+        return "User{id=" + this.user_id + ", ...}";
+    }
 }
