@@ -19,6 +19,7 @@ public class Message {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long message_id;
 
+    @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
 
     @CreationTimestamp

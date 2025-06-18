@@ -2,9 +2,13 @@ package com.websocket.chatApp.controller;
 
 import com.websocket.chatApp.dto.MessageResponse;
 import com.websocket.chatApp.service.chat.ChatService;
+import com.websocket.chatApp.util.APIResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -17,7 +21,19 @@ public class ChatController {
     public final ChatService chatService;
 
     @GetMapping("/history")
-    public List<MessageResponse> getChatHistory(){
-        return chatService.getChatHistory();
+    public ResponseEntity<APIResponse<List<MessageResponse>>> getChatHistory(
+            @RequestParam(required = false) Long lastMessageId,
+            @RequestParam(defaultValue = "20") int limit
+    ){
+
+        List<MessageResponse> response = chatService.getChatHistory(lastMessageId,limit);
+
+        APIResponse chatHistoryResponse = new APIResponse<>(
+                HttpStatus.OK,
+                "Chat history retrieved succesfully",
+                response
+        );
+
+        return new ResponseEntity<>(chatHistoryResponse, HttpStatus.OK);
     }
 }

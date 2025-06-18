@@ -4,12 +4,16 @@ import com.websocket.chatApp.dto.LoginRequest;
 import com.websocket.chatApp.dto.LoginResponse;
 import com.websocket.chatApp.model.User;
 import com.websocket.chatApp.repository.UserRepository;
+import com.websocket.chatApp.util.APIResponse;
 import com.websocket.chatApp.util.JwtUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -26,11 +30,13 @@ public class AuthServiceImpl implements AuthService{
     public LoginResponse login(LoginRequest loginRequestDTO) {
 
         if(Objects.equals(loginRequestDTO.getUsername(), "") || loginRequestDTO.getUsername()==null){
-            throw new RuntimeException();
+
+            throw new IllegalArgumentException("Username is required");
         }
 
         if(Objects.equals(loginRequestDTO.getPassword(), "") || loginRequestDTO.getPassword()==null){
-            throw new RuntimeException();
+            throw new IllegalArgumentException("Password is required");
+
         }
 
         try {
@@ -47,14 +53,13 @@ public class AuthServiceImpl implements AuthService{
         final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequestDTO.getUsername());
         final String jwt = jwtUtil.generateToken(userDetails);
 
-        User user = userRepository.findByUsername(loginRequestDTO.getUsername());
+        User user = userRepository.findByUsername(loginRequestDTO.getUsername()).orElseThrow(()->new UsernameNotFoundException("User not found with username"+loginRequestDTO.getUsername()));
 
-        LoginResponse loginResponseDTO = new LoginResponse();
+        LoginResponse loginResponse = new LoginResponse();
 
-        loginResponseDTO.setUsername(user.getUsername());
-        loginResponseDTO.setToken(jwt);
+        loginResponse.setUsername(user.getUsername());
+        loginResponse.setToken(jwt);
 
-
-        return loginResponseDTO;
+        return loginResponse;
     }
 }

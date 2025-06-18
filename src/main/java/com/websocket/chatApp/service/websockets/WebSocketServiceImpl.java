@@ -1,5 +1,6 @@
 package com.websocket.chatApp.service.websockets;
 
+import com.websocket.chatApp.exception.InvalidMessageException;
 import com.websocket.chatApp.mapper.MessageMapper;
 import com.websocket.chatApp.model.Message;
 import com.websocket.chatApp.dto.MessageRequest;
@@ -9,6 +10,7 @@ import com.websocket.chatApp.repository.MessageRepository;
 import com.websocket.chatApp.repository.UserRepository;
 import com.websocket.chatApp.util.JwtUtil;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,15 +25,16 @@ public class WebSocketServiceImpl implements  WebSocketService {
     @Override
     public MessageResponse sendMessage(MessageRequest inputMessage) {
 
+        if(inputMessage.getContent()==null || inputMessage.getContent().isEmpty()){
+                throw new InvalidMessageException("Message should not be empty");
+        }
+
         System.out.println("Received message: " + inputMessage);
 
         String username = jwtUtil.getUsernameFromToken(inputMessage.getToken());
 
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
 
-        if(user==null){
-            throw new IllegalArgumentException("User not found");
-        }
 
 
         Message msg= messageMapper.toEntity(inputMessage, user);
@@ -41,7 +44,7 @@ public class WebSocketServiceImpl implements  WebSocketService {
 
         MessageResponse responseMessage = messageMapper.toDTO(savedMessage);
 
-        System.out.println("Sent messatge: "+responseMessage);
+        System.out.println("Sent message: "+responseMessage);
 
         return responseMessage;
     }
