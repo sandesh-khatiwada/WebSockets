@@ -6,6 +6,7 @@ import com.websocket.chatApp.repository.MessageRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -17,12 +18,12 @@ public class ChatServiceImpl implements ChatService {
     private final MessageRepository messageRepository;
 
     @Override
-    public List<MessageResponse> getChatHistory(Long lastMessageId, int limit) {
+    public List<MessageResponse> getChatHistory(LocalDateTime createdAt, int limit) {
         List<Message> messages;
-        if (lastMessageId == null) {
+        if (createdAt == null) {
             messages = messageRepository.findTopNMessages(limit);
         } else {
-            messages = messageRepository.findMessagesBefore(lastMessageId, limit);
+            messages = messageRepository.findMessagesBefore(createdAt, limit);
         }
 
         // Sort messages by createdAt ASC (oldest of the fetched messages first)
@@ -35,6 +36,7 @@ public class ChatServiceImpl implements ChatService {
             messageResponse.setUser_id(message.getUserId());
             messageResponse.setUser_name(message.getUser().getUsername());
             messageResponse.setContent(message.getContent());
+            messageResponse.setCreated_at(message.getCreatedAt());
             messageResponses.add(messageResponse);
         });
 

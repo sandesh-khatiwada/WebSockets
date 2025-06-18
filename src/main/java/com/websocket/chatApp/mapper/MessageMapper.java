@@ -15,6 +15,7 @@ public class MessageMapper {
         messageDTO.setUser_name(message.getUser().getUsername());
         messageDTO.setUser_id(message.getUser().getUser_id());
         messageDTO.setContent(message.getContent());
+        messageDTO.setCreated_at(message.getCreatedAt());
 
         return messageDTO;
     }
