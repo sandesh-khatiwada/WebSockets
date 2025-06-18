@@ -2,9 +2,9 @@ spring.application.name=chatApp
 server.port=8081
 
 # Database configuration
-spring.datasource.url=jdbc:postgresql://localhost:5433/chat
-spring.datasource.username=sandesh
-spring.datasource.password=Civilsmart@123
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
 
 
 spring.datasource.driver-class-name=org.postgresql.Driver
@@ -17,5 +17,5 @@ spring.jpa.properties.hibernate.format_sql=false
 
 spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
 
-jwt.secret=8y/B?E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjXnZr4u7x!A%D*G-KaPdSgVkYp3s6v9
-jwt.token-expiration: 9900000
+jwt.secret=
+jwt.token-expiration:
