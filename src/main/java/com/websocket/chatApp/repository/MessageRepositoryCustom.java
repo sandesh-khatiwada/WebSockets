@@ -1,0 +1,10 @@
+package com.websocket.chatApp.repository;
+
+import com.websocket.chatApp.model.Message;
+
+import java.util.List;
+
+public interface MessageRepositoryCustom {
+    List<Message> findTopNMessages(int limit);
+    List<Message> findMessagesBefore(Long lastMessageId, int limit);
+}
