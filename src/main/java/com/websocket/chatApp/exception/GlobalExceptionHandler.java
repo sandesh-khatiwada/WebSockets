@@ -31,7 +31,7 @@ public class GlobalExceptionHandler {
         APIResponse<Object> response = new APIResponse<>(
                 HttpStatus.BAD_REQUEST,
                 "Invalid request body",
-                Collections.singletonList(ex.getMessage())
+                Collections.singletonList("Request body is missing")
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }

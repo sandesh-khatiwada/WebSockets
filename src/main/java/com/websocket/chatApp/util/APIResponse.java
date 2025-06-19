@@ -41,7 +41,7 @@ public class APIResponse<T> {
     }
 
     // Error response constructor
-    public APIResponse(HttpStatus status, String code, String message, List<String> errors) {
+    public APIResponse(HttpStatus status, String message, List<String> errors) {
         this.success = false;
         this.status = status;
         this.message = message;
