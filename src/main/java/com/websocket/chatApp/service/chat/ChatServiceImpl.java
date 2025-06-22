@@ -33,10 +33,11 @@ public class ChatServiceImpl implements ChatService {
         List<MessageResponse> messageResponses = new ArrayList<>();
         messages.forEach(message -> {
             MessageResponse messageResponse = new MessageResponse();
-            messageResponse.setUser_id(message.getUserId());
+            messageResponse.setUser_id(message.getUser().getUser_id());
             messageResponse.setUser_name(message.getUser().getUsername());
             messageResponse.setContent(message.getContent());
             messageResponse.setCreated_at(message.getCreatedAt());
+            messageResponse.setMessage_id(message.getMessage_id());
             messageResponses.add(messageResponse);
         });
 

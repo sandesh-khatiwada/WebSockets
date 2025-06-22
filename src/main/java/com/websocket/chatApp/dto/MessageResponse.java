@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class MessageResponse {
+    private Long message_id;
     private String content;
     private Long user_id; // Matches JSON field
     private String user_name;
