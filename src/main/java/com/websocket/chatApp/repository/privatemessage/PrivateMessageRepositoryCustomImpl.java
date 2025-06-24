@@ -1,6 +1,5 @@
-package com.websocket.chatApp.repository;
+package com.websocket.chatApp.repository.privatemessage;
 
-import com.websocket.chatApp.model.Message;
 import com.websocket.chatApp.model.PrivateMessage;
 import com.websocket.chatApp.model.User;
 import jakarta.persistence.EntityManager;

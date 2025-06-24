@@ -17,7 +17,7 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long message_id;
+    private Long messageId;
 
     @Column(name = "content", columnDefinition = "TEXT", nullable = false)
     private String content;
@@ -36,6 +36,6 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Message{senderId=" + (this.user != null ? this.user.getUser_id() : userId) + ", content='" + content + "'}";
+        return "Message{senderId=" + (this.user != null ? this.user.getUserId() : userId) + ", content='" + content + "'}";
     }
 }

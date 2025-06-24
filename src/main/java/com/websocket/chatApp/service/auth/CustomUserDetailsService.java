@@ -1,7 +1,7 @@
 package com.websocket.chatApp.service.auth;
 
 import com.websocket.chatApp.model.User;
-import com.websocket.chatApp.repository.UserRepository;
+import com.websocket.chatApp.repository.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

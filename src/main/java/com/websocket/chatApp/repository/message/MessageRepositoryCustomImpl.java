@@ -1,4 +1,4 @@
-package com.websocket.chatApp.repository;
+package com.websocket.chatApp.repository.message;
 
 import com.websocket.chatApp.model.Message;
 import jakarta.persistence.EntityManager;

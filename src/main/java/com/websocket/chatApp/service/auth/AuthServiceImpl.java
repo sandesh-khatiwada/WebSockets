@@ -3,7 +3,7 @@ package com.websocket.chatApp.service.auth;
 import com.websocket.chatApp.dto.LoginRequest;
 import com.websocket.chatApp.dto.LoginResponse;
 import com.websocket.chatApp.model.User;
-import com.websocket.chatApp.repository.UserRepository;
+import com.websocket.chatApp.repository.user.UserRepository;
 import com.websocket.chatApp.util.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;

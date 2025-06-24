@@ -5,7 +5,6 @@ import com.websocket.chatApp.dto.MessageResponse;
 import com.websocket.chatApp.dto.PrivateMessageRequest;
 import com.websocket.chatApp.dto.PrivateMessageResponse;
 import com.websocket.chatApp.service.websockets.WebSocketService;
-import com.websocket.chatApp.util.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +20,7 @@ public class WebSocketController {
 
     private final WebSocketService webSocketService;
     private final SimpMessagingTemplate messagingTemplate;
-    private final JwtUtil jwtUtil;
+
 
 
     @MessageMapping("/chat")

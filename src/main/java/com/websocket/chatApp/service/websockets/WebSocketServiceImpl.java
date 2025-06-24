@@ -9,9 +9,9 @@ import com.websocket.chatApp.dto.MessageRequest;
 import com.websocket.chatApp.dto.MessageResponse;
 import com.websocket.chatApp.model.PrivateMessage;
 import com.websocket.chatApp.model.User;
-import com.websocket.chatApp.repository.MessageRepository;
-import com.websocket.chatApp.repository.PrivateMessageRepository;
-import com.websocket.chatApp.repository.UserRepository;
+import com.websocket.chatApp.repository.message.MessageRepository;
+import com.websocket.chatApp.repository.privatemessage.PrivateMessageRepository;
+import com.websocket.chatApp.repository.user.UserRepository;
 import com.websocket.chatApp.util.JwtUtil;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -80,12 +80,12 @@ public class WebSocketServiceImpl implements  WebSocketService {
 
         PrivateMessageResponse privateMessageResponse = new PrivateMessageResponse();
         privateMessageResponse.setContent(savedMessage.getContent());
-        privateMessageResponse.setMessage_id(savedMessage.getMessage_id());
-        privateMessageResponse.setSender_id(savedMessage.getSender().getUser_id());
-        privateMessageResponse.setReceiver_id(savedMessage.getReceiver().getUser_id());
-        privateMessageResponse.setSender_username(savedMessage.getSender().getUsername());
-        privateMessageResponse.setReceiver_username(savedMessage.getReceiver().getUsername());
-        privateMessageResponse.setCreated_at(savedMessage.getCreatedAt());
+        privateMessageResponse.setMessageId(savedMessage.getMessageId());
+        privateMessageResponse.setSenderId(savedMessage.getSender().getUserId());
+        privateMessageResponse.setReceiverId(savedMessage.getReceiver().getUserId());
+        privateMessageResponse.setSenderUsername(savedMessage.getSender().getUsername());
+        privateMessageResponse.setReceiverUsername(savedMessage.getReceiver().getUsername());
+        privateMessageResponse.setCreatedAt(savedMessage.getCreatedAt());
 
         System.out.println("Sent message: "+privateMessageResponse);
 
