@@ -5,9 +5,9 @@ import com.websocket.chatApp.dto.PrivateMessageResponse;
 import com.websocket.chatApp.model.Message;
 import com.websocket.chatApp.model.PrivateMessage;
 import com.websocket.chatApp.model.User;
-import com.websocket.chatApp.repository.MessageRepository;
-import com.websocket.chatApp.repository.PrivateMessageRepository;
-import com.websocket.chatApp.repository.UserRepository;
+import com.websocket.chatApp.repository.message.MessageRepository;
+import com.websocket.chatApp.repository.privatemessage.PrivateMessageRepository;
+import com.websocket.chatApp.repository.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -41,11 +41,11 @@ public class ChatServiceImpl implements ChatService {
         List<MessageResponse> messageResponses = new ArrayList<>();
         messages.forEach(message -> {
             MessageResponse messageResponse = new MessageResponse();
-            messageResponse.setUser_id(message.getUser().getUser_id());
-            messageResponse.setUser_name(message.getUser().getUsername());
+            messageResponse.setUserId(message.getUser().getUserId());
+            messageResponse.setSenderUsername(message.getUser().getUsername());
             messageResponse.setContent(message.getContent());
-            messageResponse.setCreated_at(message.getCreatedAt());
-            messageResponse.setMessage_id(message.getMessage_id());
+            messageResponse.setCreatedAt(message.getCreatedAt());
+            messageResponse.setMessageId(message.getMessageId());
             messageResponses.add(messageResponse);
         });
 
@@ -74,12 +74,12 @@ public class ChatServiceImpl implements ChatService {
         List<PrivateMessageResponse> privateMessageResponses = new ArrayList<>();
         messages.forEach(message -> {
             PrivateMessageResponse messageResponse = new PrivateMessageResponse();
-            messageResponse.setSender_id(message.getSender().getUser_id());
-            messageResponse.setReceiver_id(message.getReceiver().getUser_id());
+            messageResponse.setSenderId(message.getSender().getUserId());
+            messageResponse.setReceiverId(message.getReceiver().getUserId());
             messageResponse.setContent(message.getContent());
-            messageResponse.setMessage_id(message.getMessage_id());
-            messageResponse.setCreated_at(message.getCreatedAt());
-            messageResponse.setSender_username(message.getSender().getUsername());
+            messageResponse.setMessageId(message.getMessageId());
+            messageResponse.setCreatedAt(message.getCreatedAt());
+            messageResponse.setSenderUsername(message.getSender().getUsername());
             privateMessageResponses.add(messageResponse);
 
         });

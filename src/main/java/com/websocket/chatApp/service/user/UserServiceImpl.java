@@ -2,7 +2,7 @@ package com.websocket.chatApp.service.user;
 
 import com.websocket.chatApp.dto.UserResponse;
 import com.websocket.chatApp.model.User;
-import com.websocket.chatApp.repository.UserRepository;
+import com.websocket.chatApp.repository.user.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

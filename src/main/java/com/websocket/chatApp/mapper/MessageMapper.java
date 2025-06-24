@@ -12,11 +12,11 @@ public class MessageMapper {
     public MessageResponse toDTO(Message message){
 
         MessageResponse messageDTO= new MessageResponse();
-        messageDTO.setMessage_id(message.getMessage_id());
-        messageDTO.setUser_name(message.getUser().getUsername());
-        messageDTO.setUser_id(message.getUser().getUser_id());
+        messageDTO.setMessageId(message.getMessageId());
+        messageDTO.setSenderUsername(message.getUser().getUsername());
+        messageDTO.setUserId(message.getUser().getUserId());
         messageDTO.setContent(message.getContent());
-        messageDTO.setCreated_at(message.getCreatedAt());
+        messageDTO.setCreatedAt(message.getCreatedAt());
 
         return messageDTO;
     }

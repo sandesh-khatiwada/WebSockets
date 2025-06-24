@@ -1,4 +1,4 @@
-package com.websocket.chatApp.repository;
+package com.websocket.chatApp.repository.user;
 
 import com.websocket.chatApp.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

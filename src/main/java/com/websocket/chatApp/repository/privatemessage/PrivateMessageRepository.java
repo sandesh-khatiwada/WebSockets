@@ -1,4 +1,4 @@
-package com.websocket.chatApp.repository;
+package com.websocket.chatApp.repository.privatemessage;
 
 import com.websocket.chatApp.model.PrivateMessage;
 import org.springframework.data.jpa.repository.JpaRepository;
