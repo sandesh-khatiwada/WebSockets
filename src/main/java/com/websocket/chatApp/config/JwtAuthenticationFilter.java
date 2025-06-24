@@ -3,7 +3,7 @@ package com.websocket.chatApp.config;
 
 
 import com.websocket.chatApp.util.JwtUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Component
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;

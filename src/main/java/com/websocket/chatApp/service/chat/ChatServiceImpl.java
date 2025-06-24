@@ -8,7 +8,7 @@ import com.websocket.chatApp.model.User;
 import com.websocket.chatApp.repository.message.MessageRepository;
 import com.websocket.chatApp.repository.privatemessage.PrivateMessageRepository;
 import com.websocket.chatApp.repository.user.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.Comparator;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
 
     private final MessageRepository messageRepository;

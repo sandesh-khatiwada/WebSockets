@@ -2,7 +2,7 @@ package com.websocket.chatApp.service.chat;
 
 import com.websocket.chatApp.dto.MessageResponse;
 import com.websocket.chatApp.dto.PrivateMessageResponse;
-import org.springframework.http.ResponseEntity;
+
 
 import java.time.LocalDateTime;
 import java.util.List;

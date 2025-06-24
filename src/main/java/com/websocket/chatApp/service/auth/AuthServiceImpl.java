@@ -5,7 +5,7 @@ import com.websocket.chatApp.dto.LoginResponse;
 import com.websocket.chatApp.model.User;
 import com.websocket.chatApp.repository.user.UserRepository;
 import com.websocket.chatApp.util.JwtUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService{
     private final AuthenticationManager authenticationManager;
     private final CustomUserDetailsService userDetailsService;

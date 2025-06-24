@@ -5,7 +5,7 @@ import com.websocket.chatApp.dto.MessageResponse;
 import com.websocket.chatApp.dto.PrivateMessageRequest;
 import com.websocket.chatApp.dto.PrivateMessageResponse;
 import com.websocket.chatApp.service.websockets.WebSocketService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -14,7 +14,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 @Controller
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WebSocketController {
     private static final Logger logger = LoggerFactory.getLogger(WebSocketController.class);
 

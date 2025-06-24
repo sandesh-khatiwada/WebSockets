@@ -13,14 +13,14 @@ import com.websocket.chatApp.repository.message.MessageRepository;
 import com.websocket.chatApp.repository.privatemessage.PrivateMessageRepository;
 import com.websocket.chatApp.repository.user.UserRepository;
 import com.websocket.chatApp.util.JwtUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WebSocketServiceImpl implements  WebSocketService {
     private final UserRepository userRepository;
     private final MessageRepository messageRepository;

@@ -3,14 +3,14 @@ package com.websocket.chatApp.service.user;
 import com.websocket.chatApp.dto.UserResponse;
 import com.websocket.chatApp.model.User;
 import com.websocket.chatApp.repository.user.UserRepository;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;

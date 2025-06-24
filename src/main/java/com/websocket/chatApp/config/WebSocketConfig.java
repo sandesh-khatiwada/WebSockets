@@ -1,7 +1,7 @@
 package com.websocket.chatApp.config;
 
 import com.websocket.chatApp.util.JwtUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -18,7 +18,7 @@ import java.util.Map;
 
 @Configuration
 @EnableWebSocketMessageBroker
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     private final JwtUtil jwtUtil;
@@ -27,7 +27,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-                .setAllowedOriginPatterns("http://localhost:5500", "http://localhost:55332", "http://localhost:4200", "http://localhost:63719", "*")
+                .setAllowedOriginPatterns("http://localhost:5500", "http://localhost:55932", "http://localhost:4200", "http://localhost:63719", "*")
                 .setHandshakeHandler(new DefaultHandshakeHandler() {
                     @Override
                     protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {

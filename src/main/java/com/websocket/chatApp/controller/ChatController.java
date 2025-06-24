@@ -5,7 +5,7 @@ import com.websocket.chatApp.dto.PrivateMessageResponse;
 import com.websocket.chatApp.service.chat.ChatService;
 import com.websocket.chatApp.util.APIResponse;
 import com.websocket.chatApp.util.JwtUtil;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +16,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/chat")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ChatController {
 
     public final ChatService chatService;
-    private JwtUtil jwtUtil;
+    private final JwtUtil jwtUtil;
 
 
     @GetMapping("/history")
