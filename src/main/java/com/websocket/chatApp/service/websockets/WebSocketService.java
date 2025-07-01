@@ -9,5 +9,5 @@ import com.websocket.chatApp.dto.PrivateMessageResponse;
 public interface WebSocketService {
 
     MessageResponse sendMessage(MessageRequest inputMessage);
-    PrivateMessageResponse sendPrivateMessage(PrivateMessageRequest inputMessage);
+    PrivateMessageResponse sendPrivateMessage(PrivateMessageRequest inputMessage) throws Exception;
 }
