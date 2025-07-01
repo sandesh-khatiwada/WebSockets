@@ -31,7 +31,7 @@ public class WebSocketController {
     }
 
     @MessageMapping("/private-chat")
-    public void sendPrivateMessage(PrivateMessageRequest messageRequest) {
+    public void sendPrivateMessage(PrivateMessageRequest messageRequest) throws Exception {
 
         logger.info("Received private message request: {}", messageRequest);
         if (messageRequest.getReceiverUsername() == null || messageRequest.getReceiverUsername().isEmpty()) {

@@ -12,6 +12,7 @@ import com.websocket.chatApp.model.User;
 import com.websocket.chatApp.repository.message.MessageRepository;
 import com.websocket.chatApp.repository.privatemessage.PrivateMessageRepository;
 import com.websocket.chatApp.repository.user.UserRepository;
+import com.websocket.chatApp.util.EncryptionUtil;
 import com.websocket.chatApp.util.JwtUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -58,7 +59,7 @@ public class WebSocketServiceImpl implements  WebSocketService {
     }
 
     @Override
-    public PrivateMessageResponse sendPrivateMessage(PrivateMessageRequest inputMessage){
+    public PrivateMessageResponse sendPrivateMessage(PrivateMessageRequest inputMessage) throws Exception {
         if(inputMessage.getContent()==null || inputMessage.getContent().isEmpty()){
             throw new InvalidMessageException("Message should not be empty");
         }
@@ -71,7 +72,9 @@ public class WebSocketServiceImpl implements  WebSocketService {
         User receiver = userRepository.findByUsername(inputMessage.getReceiverUsername()).orElseThrow(()->new UsernameNotFoundException("User not found"));
         PrivateMessage privateMessage = new PrivateMessage();
 
-        privateMessage.setContent(inputMessage.getContent());
+        privateMessage.setContent(EncryptionUtil.encrypt(inputMessage.getContent()));
+
+//        EncryptionUtil.encrypt(message.getContent())
         privateMessage.setSender(sender);
         privateMessage.setReceiver(receiver);
         privateMessage.setCreatedAt(LocalDateTime.now());
@@ -80,7 +83,7 @@ public class WebSocketServiceImpl implements  WebSocketService {
 
 
         PrivateMessageResponse privateMessageResponse = new PrivateMessageResponse();
-        privateMessageResponse.setContent(savedMessage.getContent());
+        privateMessageResponse.setContent(EncryptionUtil.decrypt(savedMessage.getContent()));
         privateMessageResponse.setMessageId(savedMessage.getMessageId());
         privateMessageResponse.setSenderId(savedMessage.getSender().getUserId());
         privateMessageResponse.setReceiverId(savedMessage.getReceiver().getUserId());
