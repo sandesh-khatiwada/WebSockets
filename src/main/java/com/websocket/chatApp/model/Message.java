@@ -32,7 +32,7 @@ public class Message {
     private User user;
 
     @Transient // Not persisted in the database
-    private Long userId; // Maps to user_id in JSON
+    private Long userId; // Maps to userId in JSON
 
     @Override
     public String toString() {
