@@ -10,7 +10,7 @@ public class EncryptionUtil {
     private static final String ALGORITHM = "AES";
 
     public static String encrypt(String data) throws Exception {
-        SecretKeySpec key = new SecretKeySpec(AES_KEY.getBytes(StandardCharsets.UTF_8), ALGORITHM);
+        SecretKeySpec key = new SecretKeySpec(Base64.getDecoder().decode(AES_KEY), ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.ENCRYPT_MODE, key);
         byte[] encrypted = cipher.doFinal(data.getBytes(StandardCharsets.UTF_8));
@@ -18,7 +18,7 @@ public class EncryptionUtil {
     }
 
     public static String decrypt(String encryptedData) throws Exception {
-        SecretKeySpec key = new SecretKeySpec(AES_KEY.getBytes(StandardCharsets.UTF_8), ALGORITHM);
+        SecretKeySpec key = new SecretKeySpec(Base64.getDecoder().decode(AES_KEY), ALGORITHM);
         Cipher cipher = Cipher.getInstance(ALGORITHM);
         cipher.init(Cipher.DECRYPT_MODE, key);
         byte[] decoded = Base64.getDecoder().decode(encryptedData);

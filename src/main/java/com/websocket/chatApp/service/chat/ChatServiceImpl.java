@@ -8,6 +8,7 @@ import com.websocket.chatApp.model.User;
 import com.websocket.chatApp.repository.message.MessageRepository;
 import com.websocket.chatApp.repository.privatemessage.PrivateMessageRepository;
 import com.websocket.chatApp.repository.user.UserRepository;
+import com.websocket.chatApp.util.EncryptionUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,11 @@ public class ChatServiceImpl implements ChatService {
             MessageResponse messageResponse = new MessageResponse();
             messageResponse.setUserId(message.getUser().getUserId());
             messageResponse.setSenderUsername(message.getUser().getUsername());
-            messageResponse.setContent(message.getContent());
+            try {
+                messageResponse.setContent(EncryptionUtil.decrypt(message.getContent()));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             messageResponse.setCreatedAt(message.getCreatedAt());
             messageResponse.setMessageId(message.getMessageId());
             messageResponses.add(messageResponse);
@@ -76,7 +81,11 @@ public class ChatServiceImpl implements ChatService {
             PrivateMessageResponse messageResponse = new PrivateMessageResponse();
             messageResponse.setSenderId(message.getSender().getUserId());
             messageResponse.setReceiverId(message.getReceiver().getUserId());
-            messageResponse.setContent(message.getContent());
+            try {
+                messageResponse.setContent(EncryptionUtil.decrypt(message.getContent()));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             messageResponse.setMessageId(message.getMessageId());
             messageResponse.setCreatedAt(message.getCreatedAt());
             messageResponse.setSenderUsername(message.getSender().getUsername());
